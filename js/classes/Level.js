@@ -7,10 +7,12 @@ export default class Level extends Phaser.Scene {
     }
 
     preload() {
+        // charge la configuration du niveau
         this.load.json('levelConfig', this.configFile);
     }
 
     create() {
+        // récupère la configuration du niveau
         this.config = this.cache.json.get('levelConfig');
 
         // image de fond
@@ -18,29 +20,32 @@ export default class Level extends Phaser.Scene {
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
 
-        // chemins
+        // chemins des ennemis à suivre
         this.paths = this.config.paths.map(pathPoints => {
-            const path = this.add.path();
-            pathPoints.forEach(point => {
+            const path = this.add.path(pathPoints[0].x, pathPoints[0].y);
+            pathPoints.slice(1).forEach(point => {
                 path.lineTo(point.x, point.y);
             });
             return path;
         });
 
-        // vagues
+        // vagues d'ennemis
         this.currentWave = 0;
         this.startNextWave();
     }
 
     startNextWave() {
+        // si on a fini toutes les vagues
         if (this.currentWave >= this.config.waves.length) {
             console.log('All waves completed');
             return;
         }
 
+        // on récupère la vague actuelle
         const wave = this.config.waves[this.currentWave];
         this.enemies = this.physics.add.group();
 
+        // on crée les ennemis de la vague
         wave.enemies.forEach(enemyConfig => {
             for (let i = 0; i < enemyConfig.count; i++) {
                 const path = this.paths[enemyConfig.pathIndex];
@@ -54,6 +59,7 @@ export default class Level extends Phaser.Scene {
     }
 
     update(time, delta) {
+        // si tous les ennemis de la vague ont été détruits on passe à la vague suivante
         if (this.enemies.countActive(true) === 0) {
             this.startNextWave();
         }

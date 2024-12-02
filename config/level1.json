@@ -2,42 +2,37 @@
     "background": "map",
     "paths": [
         [
-            { "x": 96, "y": -32 },
-            { "x": 96, "y": 224 },
-            { "x": 224, "y": 224 },
-            { "x": 224, "y": 96 },
-            { "x": 416, "y": 96 },
-            { "x": 416, "y": 224 },
-            { "x": 544, "y": 224 },
-            { "x": 544, "y": 96 },
-            { "x": 736, "y": 96 },
-            { "x": 736, "y": 224 }
+            { "x": 160, "y": 0 },
+            { "x": 160, "y": 500 },
+            { "x": 1060, "y": 500 },
+            { "x": 1060, "y": 720 }
         ],
         [
-            { "x": 50, "y": -32 },
-            { "x": 50, "y": 200 },
-            { "x": 200, "y": 200 },
-            { "x": 200, "y": 50 },
-            { "x": 400, "y": 50 },
-            { "x": 400, "y": 200 },
-            { "x": 600, "y": 200 },
-            { "x": 600, "y": 50 },
-            { "x": 800, "y": 50 },
-            { "x": 800, "y": 200 }
+            { "x": 0, "y": 500 },
+            { "x": 1060, "y": 500 },
+            { "x": 1060, "y": 0 }
+        ],
+        [
+            { "x": 0, "y": 500 },
+            { "x": 1060, "y": 500 },
+            { "x": 1060, "y": 128 },
+            { "x": 1280, "y": 128 }
         ]
     ],
     "waves": [
         {
             "enemies": [
                 { "type": "enemy", "count": 3, "pathIndex": 0, "delay": 1 },
-                { "type": "enemy", "count": 2, "pathIndex": 1, "delay": 2 }
+                { "type": "enemy", "count": 2, "pathIndex": 1, "delay": 2 },
+                { "type": "enemy", "count": 1, "pathIndex": 2, "delay": 3 }
             ]
         },
         {
             "enemies": [
                 { "type": "enemy", "count": 5, "pathIndex": 0, "delay": 1 },
                 { "type": "enemy", "count": 3, "pathIndex": 1, "delay": 2 },
-                { "type": "tower", "count": 40, "pathIndex": 1, "delay": 3 }
+                { "type": "enemy", "count": 2, "pathIndex": 2, "delay": 3 },
+                { "type": "tower", "count": 1, "pathIndex": 1, "delay": 4 }
             ]
         }
     ]
