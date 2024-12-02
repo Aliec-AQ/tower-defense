@@ -1,4 +1,4 @@
-import * as Phaser from '../node_modules/phaser/dist/phaser.js';
+
 import BootScene from './scenes/BootScene.js';
 import MainScene from './scenes/MainScene.js';
 
