@@ -31,8 +31,7 @@
             "enemies": [
                 { "type": "enemy", "count": 5, "pathIndex": 0, "delay": 1 },
                 { "type": "enemy", "count": 3, "pathIndex": 1, "delay": 2 },
-                { "type": "enemy", "count": 2, "pathIndex": 2, "delay": 3 },
-                { "type": "tower", "count": 1, "pathIndex": 1, "delay": 4 }
+                { "type": "enemy", "count": 2, "pathIndex": 2, "delay": 3 }
             ]
         }
     ]
