@@ -1,0 +1,6 @@
+{
+    "buttons":[
+        { "x": 500, "y": 200, "levelConfig": "../../config/level1.json"},
+        { "x": 1000, "y": 700, "levelConfig": "../../config/level1.json"}
+    ]
+}

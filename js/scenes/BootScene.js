@@ -7,6 +7,9 @@ class BootScene extends Phaser.Scene {
         // Load assets here
         this.load.image('smallGoblin', 'assets/smallGoblin.png');
         this.load.image('map', 'assets/map.png');
+
+        // Load the menu configuration
+        this.load.json('menu-config', "../../config/menu-config.json");
     }
 
     create() {
