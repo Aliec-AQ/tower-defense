@@ -18,8 +18,6 @@ export default class Level extends Phaser.Scene {
 
         // image de fond
         this.background = this.add.image(0, 0, this.config.background).setOrigin(0, 0);
-        this.background.displayWidth = this.sys.game.config.width;
-        this.background.displayHeight = this.sys.game.config.height;
 
         // chemins des ennemis à suivre
         this.paths = this.config.paths.map(pathPoints => {

@@ -32,6 +32,8 @@ class MainScene extends Phaser.Scene {
         }else{
             button = this.add.image(buttonConfig.x, buttonConfig.y, 'conqueredFlag').setOrigin(0.5, 0.5);
         }
+
+        console.log(buttonConfig.x, buttonConfig.y);
     
         button.setScale(0.33);
         button.setInteractive();

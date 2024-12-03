@@ -1,6 +1,6 @@
 {
     "images": [
-        {"main-map": "/assets/main-map.jpg"},
+        {"main-map": "/assets/main-map.png"},
         {"smallGoblin": "/assets/smallGoblin.png"},
         {"map": "/assets/map.png"},
         {"enemyFlag": "/assets/enemy_flag.png"},
