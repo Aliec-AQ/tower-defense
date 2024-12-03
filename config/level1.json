@@ -25,17 +25,17 @@
     "waves": [
         {
             "enemies": [
-                { "type": "enemy", "count": 3, "pathIndex": 0, "delay": 1 },
-                { "type": "enemy", "count": 2, "pathIndex": 1, "delay": 2 },
-                { "type": "enemy", "count": 1, "pathIndex": 2, "delay": 3 }
+                { "type": "smallGoblin", "count": 3, "pathIndex": 0, "delay": 1 },
+                { "type": "smallGoblin", "count": 2, "pathIndex": 1, "delay": 2 },
+                { "type": "smallGoblin", "count": 1, "pathIndex": 2, "delay": 3 }
             ]
         },
         {
             "enemies": [
-                { "type": "enemy", "count": 50, "pathIndex": 0, "delay": 1 },
-                { "type": "enemy", "count": 20, "pathIndex": 1, "delay": 2 },
-                { "type": "enemy", "count": 20, "pathIndex": 2, "delay": 3 },
-                { "type": "enemy", "count": 2000, "pathIndex": 2, "delay": 15 }
+                { "type": "smallGoblin", "count": 50, "pathIndex": 0, "delay": 1 },
+                { "type": "smallGoblin", "count": 20, "pathIndex": 1, "delay": 2 },
+                { "type": "smallGoblin", "count": 20, "pathIndex": 2, "delay": 3 },
+                { "type": "smallGoblin", "count": 2000, "pathIndex": 2, "delay": 15 }
             ]
         }
     ]

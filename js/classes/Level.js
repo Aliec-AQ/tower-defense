@@ -1,4 +1,5 @@
-import Enemy from './Enemy.js';
+import Enemy from './Enemy/Enemy.js';
+import SmallGoblin from './Enemy/SmallGoblin.js';
 
 export default class Level extends Phaser.Scene {
     constructor(configFile) {
@@ -50,7 +51,13 @@ export default class Level extends Phaser.Scene {
             for (let i = 0; i < enemyConfig.count; i++) {
                 const path = this.paths[enemyConfig.pathIndex];
                 const startPoint = path.getStartPoint();
-                const enemy = new Enemy(this, path, startPoint, enemyConfig);
+                let enemy = null;
+                switch(enemyConfig.type){
+                    case 'smallGoblin' : enemy = new SmallGoblin(this, path, startPoint, enemyConfig);
+                    break;
+                    default: console.log("merde de default");
+                    break
+                }
                 this.enemies.add(enemy);
             }
         });
