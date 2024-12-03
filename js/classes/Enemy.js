@@ -17,12 +17,12 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         this.setVisible(false);
 
         // décalage de la position de départ
-        let x = Math.round( Math.random() * 60 - 5);
-        let y = Math.round(Math.random() * 60 - 5);
+        let x = Math.round( Math.random() * 55 );
+        let y = Math.round(Math.random() * 55 );
         this.pathOffset = new Phaser.Math.Vector2(x, y);
 
-        let rnd = Math.random();
-        console.log(rnd);
+        let rnd = Math.random() * 1.5;
+
         scene.time.delayedCall(rnd*1000, () => {
             this.setVisible(true);
             this.scene.time.delayedCall(enemyConfig.delay * 1000, () => {
