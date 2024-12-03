@@ -12,7 +12,6 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         scene.physics.add.existing(this);
         this.hp = hp;
         this.attack = attack;
-        this.setScale(1.5);
         this.speed = speed;
         this.setVisible(false);
 

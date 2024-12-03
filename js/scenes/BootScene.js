@@ -4,18 +4,35 @@ class BootScene extends Phaser.Scene {
     }
 
     preload() {
-        // Load assets here
-        this.load.image('main-map', 'assets/main-map.jpg');
-        this.load.image('smallGoblin', 'assets/smallGoblin.png');
-        this.load.image('map', 'assets/map.png');
-
-        // Load the menu configuration
-        this.load.json('menu-config', "../../config/menu-config.json");
+        // Load the configuration file
+        this.load.json('loadConfig', '/config/game/load.config.json');
     }
-
+    
     create() {
-        // Start the main game scene
-        this.scene.start('MainScene');
+        // Retrieve the configuration data
+        const loadConfig = this.cache.json.get('loadConfig');
+    
+        // Load images
+        loadConfig.images.forEach(image => {
+            const key = Object.keys(image)[0];
+            const path = image[key];
+            this.load.image(key, path);
+        });
+    
+        // Load JSON files
+        loadConfig.json.forEach(json => {
+            const key = Object.keys(json)[0];
+            const path = json[key];
+            this.load.json(key, path);
+        });
+    
+        // Start the next scene after loading all assets
+        this.load.on('complete', () => {
+            this.scene.start('MainScene'); // Replace 'NextScene' with your next scene key
+        });
+    
+        // Start loading the assets
+        this.load.start();
     }
 }
 

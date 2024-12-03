@@ -1,0 +1,13 @@
+{
+    "images": [
+        {"main-map": "/assets/main-map.jpg"},
+        {"smallGoblin": "/assets/smallGoblin.png"},
+        {"map": "/assets/map.png"},
+        {"enemyFlag": "/assets/enemy_flag.png"},
+        {"conqueredFlag": "/assets/conquered_flag.png"},
+        {"hoverFlag": "/assets/hover_flag.png"}
+    ],
+    "json": [
+        {"mapConfig": "/config/game/map.config.json"}
+    ]
+}

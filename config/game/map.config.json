@@ -1,0 +1,6 @@
+{
+    "buttons":[
+        { "x": 500, "y": 200, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
+        { "x": 1000, "y": 700, "levelConfig": "/config/levels/testLevel.json", "isEnemy": false}
+    ]
+}

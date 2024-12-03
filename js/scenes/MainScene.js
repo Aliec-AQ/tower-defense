@@ -6,14 +6,16 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
-        this.config = this.cache.json.get('menu-config');
+        this.config = this.cache.json.get('mapConfig');
 
+        // Image de fond
         this.background = this.add.image(0, 0, 'main-map').setOrigin(0, 0);
         this.background.displayWidth = this.sys.game.config.width;
         this.background.displayHeight = this.sys.game.config.height;
 
+        // Création des boutons
         this.config.buttons.forEach(buttonConfig => {   
-            this.createButton(buttonConfig.x, buttonConfig.y, buttonConfig.levelConfig);
+            this.createButton(buttonConfig);
         });
     
     }
@@ -22,17 +24,34 @@ class MainScene extends Phaser.Scene {
         this.scene.add('LevelScene', new Level(levelConfig), true);
     }
 
-    createButton(x, y, levelConfig) {
-        const button = this.add.text(x, y, "X", { fontSize: '32px', fill: '#fff' });
+    createButton(buttonConfig) {
+        // Choix de l'image à afficher
+        let button = null;
+        if(buttonConfig.isEnemy){
+            button = this.add.image(buttonConfig.x, buttonConfig.y, 'enemyFlag').setOrigin(0.5, 0.5);
+        }else{
+            button = this.add.image(buttonConfig.x, buttonConfig.y, 'conqueredFlag').setOrigin(0.5, 0.5);
+        }
+    
+        button.setScale(0.33);
         button.setInteractive();
-        button.on('pointerdown', () => {
-            this.launchLevel(levelConfig);
-        });
+    
+        // Création de l'image de survol
+        const hoverImage = this.add.image(buttonConfig.x, buttonConfig.y, 'hoverFlag').setOrigin(0.5, 0.5);
+        hoverImage.setScale(0.33);
+        hoverImage.setVisible(false);
+    
+        // Gestion des événements
         button.on('pointerover', () => {
-            button.setText('Y');
+            hoverImage.setVisible(true);
         });
+    
         button.on('pointerout', () => {
-            button.setText('X');
+            hoverImage.setVisible(false);
+        });
+    
+        button.on('pointerdown', () => {
+            this.launchLevel(buttonConfig.levelConfig);
         });
     }
 }

@@ -38,7 +38,7 @@ export default class Level extends Phaser.Scene {
     startNextWave() {
         // si on a fini toutes les vagues
         if (this.currentWave >= this.config.waves.length) {
-            console.log('All waves completed');
+            this.scene.stop('LevelScene');
             return;
         }
 
