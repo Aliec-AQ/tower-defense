@@ -17,26 +17,30 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         this.setVisible(false);
 
         // décalage de la position de départ
-        let x = Math.round( Math.random() * 40 - 5);
-        let y = Math.round(Math.random() * 40 - 5);
+        let x = Math.round( Math.random() * 60 - 5);
+        let y = Math.round(Math.random() * 60 - 5);
         this.pathOffset = new Phaser.Math.Vector2(x, y);
 
-        // timer pour le délai de départ
-        scene.time.delayedCall(enemyConfig.delay * 1000, () => {
-            // rend l'ennemi visible
+        let rnd = Math.random();
+        console.log(rnd);
+        scene.time.delayedCall(rnd*1000, () => {
             this.setVisible(true);
-            // stocke le décalage de position initial
-            const initialPathOffset = this.pathOffset.clone();
-            // démarre le suivi du chemin
-            this.startFollow({
-                duration: 10000 / this.speed,
-                positionOnPath: true,
-                onComplete: () => {
-                    this.destroy();
-                }
+            this.scene.time.delayedCall(enemyConfig.delay * 1000, () => {
+                // rend l'ennemi visible
+                this.setVisible(true);
+                // stocke le décalage de position initial
+                const initialPathOffset = this.pathOffset.clone();
+                // démarre le suivi du chemin
+                this.startFollow({
+                    duration: 10000 / this.speed,
+                    positionOnPath: true,
+                    onComplete: () => {
+                        this.destroy();
+                    }
+                });
+                // on réinitialise le décalage de position car startFollow l'a modifié pour {x: 0, y: 0} NIQUE SA MERE PHASER AVEC SES METHODES DE MERDE ptn de out.copy de con
+                this.pathOffset = initialPathOffset;
             });
-            // on réinitialise le décalage de position car startFollow l'a modifié pour {x: 0, y: 0} NIQUE SA MERE PHASER AVEC SES METHODES DE MERDE ptn de out.copy de con
-            this.pathOffset = initialPathOffset;
         });
     }
 
@@ -46,5 +50,9 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         if (this.hp <= 0) {
             this.destroy();
         }
+    }
+
+    startLife(){
+        
     }
 }
