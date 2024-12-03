@@ -5,6 +5,7 @@ class BootScene extends Phaser.Scene {
 
     preload() {
         // Load assets here
+        this.load.image('main-map', 'assets/main-map.jpg');
         this.load.image('smallGoblin', 'assets/smallGoblin.png');
         this.load.image('map', 'assets/map.png');
 
