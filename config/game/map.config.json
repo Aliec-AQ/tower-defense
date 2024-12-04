@@ -3,11 +3,10 @@
         { "x": 555, "y": 230, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
         { "x": 75, "y": 270, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
         { "x": 1120, "y": 45, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
-        { "x": 1120, "y": 45, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
-        { "x": 1037, "y": 530, "levelConfig": "/config/levels/testLevel.json", "isEnemy": false},
-        { "x": 115, "y": 470, "levelConfig": "/config/levels/testLevel.json", "isEnemy": false},
+        { "x": 1037, "y": 530, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
+        { "x": 115, "y": 470, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
         { "x": 115, "y": 645, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
         { "x": 795, "y": 170, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true},
-        { "x": 350, "y": 350, "levelConfig": "/config/levels/testLevel.json", "isEnemy": false}
+        { "x": 350, "y": 350, "levelConfig": "/config/levels/testLevel2.json", "isEnemy": false}
     ]
 }

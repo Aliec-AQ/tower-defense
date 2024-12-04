@@ -34,6 +34,7 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
                     duration: 10000 / this.speed,
                     positionOnPath: true,
                     onComplete: () => {
+                        this.scene.removeLife(this.attack);
                         this.destroy();
                     }
                 });

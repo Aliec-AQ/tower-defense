@@ -6,6 +6,7 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
+
         this.config = this.cache.json.get('mapConfig');
 
         // Image de fond
@@ -17,11 +18,10 @@ class MainScene extends Phaser.Scene {
         this.config.buttons.forEach(buttonConfig => {   
             this.createButton(buttonConfig);
         });
-    
     }
 
     launchLevel(levelConfig) {
-        this.scene.add('LevelScene', new Level(levelConfig), true);
+        this.scene.add('LevelScene', new Level(), true, levelConfig);
     }
 
     createButton(buttonConfig) {
@@ -32,8 +32,6 @@ class MainScene extends Phaser.Scene {
         }else{
             button = this.add.image(buttonConfig.x, buttonConfig.y, 'conqueredFlag').setOrigin(0.5, 0.5);
         }
-
-        console.log(buttonConfig.x, buttonConfig.y);
     
         button.setScale(0.33);
         button.setInteractive();
