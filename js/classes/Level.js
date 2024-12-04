@@ -41,6 +41,7 @@ export default class Level extends Phaser.Scene {
         this.startNextWave();
     }
 
+    // démarre la vague suivante
     startNextWave() {
         // si on a fini toutes les vagues
         if (this.currentWave >= this.totalWaves) {
@@ -71,6 +72,7 @@ export default class Level extends Phaser.Scene {
         this.currentWave++;
     }
 
+    // fin du niveau
     endLevel(win) {
         this.finished = true;
         // stop les ennemis restants
@@ -80,36 +82,63 @@ export default class Level extends Phaser.Scene {
             });
         }
 
+        // pleins de pixel perfect configuration car sinon c'est la merde et c'est pas beau
+
         // affiche le menu de fin
+        const panel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 20, 'panelShell').setScale(1.5);
+        const chains = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 159, 'chains').setScale(1.5);
+        const chains2 = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 298, 'chains').setScale(1.5);
+        const panel2 = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'panelShell').setScale(1.5);
+
+        // bouton menu
+        const menuButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 12, 'panelButton')
+        .setScale(1.5)
+        .setInteractive()
+        .on('pointerover', () => menuButton.setTexture('panelButtonHover'))
+        .on('pointerout', () => menuButton.setTexture('panelButton'))
+        .on('pointerdown', () => {
+            this.scene.start('TransitionScene', {MainScene: true});
+        });
+        // texte du bouton menu
+        const menuText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 12, 'Menu', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
+
+        // bouton replay
+        const replayButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 51, 'panelButton')
+        .setScale(1.5)
+        .setInteractive()
+        .on('pointerover', () => replayButton.setTexture('panelButtonHover'))
+        .on('pointerout', () => replayButton.setTexture('panelButton'))
+        .on('pointerdown', () => {
+            this.scene.restart();
+        });
+        // texte du bouton replay
+        const replayText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 51, 'Replay', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
+
+        // si on a gagné on affiche un texte de victoire
         if(win){
-            const winText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, 'You Win', { fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
-                    
-            const nextLevelButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 100, 'Next Level', { fontSize: '32px', fill: '#fff' })
-            .setOrigin(0.5)
+            // texte de victoire
+            const winText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Win', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' }).setOrigin(0.5);
+
+            // bouton niveau suivant
+            const extendPanel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 128, 'panelExtendShell').setScale(1.5);
+
+            const nextLevelButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'panelButton')
+            .setScale(1.5)
             .setInteractive()
+            .on('pointerover', () => nextLevelButton.setTexture('panelButtonHover'))
+            .on('pointerout', () => nextLevelButton.setTexture('panelButton'))
             .on('pointerdown', () => {
                 this.scene.start('TransitionScene', {MainScene: false, levelToLoad: this.config.nextLevel});
             });
+            // texte du bouton niveau suivant
+            const nextLevelText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'Next Level', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
         }else{
-            const gameOverText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, 'Game Over', { fontSize: '64px', fill: '#fff' }).setOrigin(0.5);
+            // texte de défaite
+            const loseText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Lose', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' }).setOrigin(0.5);
         }
-    
-        const replayButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Rejouer', { fontSize: '32px', fill: '#fff' })
-            .setOrigin(0.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-                console.log('replay');
-                this.scene.restart();
-        });
-
-        const menuButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 50, 'Return to Menu', { fontSize: '32px', fill: '#fff' })
-            .setOrigin(0.5)
-            .setInteractive()
-            .on('pointerdown', () => {
-                this.scene.start('TransitionScene', {MainScene: true});
-        });
     }
 
+    // enlève des vies au joueur quand un ennemi atteint la fin du chemin
     removeLife(attack) {
         this.lives -= attack;
         if (this.lives <= 0) {

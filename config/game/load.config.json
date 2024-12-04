@@ -1,11 +1,16 @@
 {
     "images": [
-        {"main-map": "/assets/main-map.png"},
-        {"smallGoblin": "/assets/smallGoblin.png"},
-        {"map": "/assets/map.png"},
-        {"enemyFlag": "/assets/enemy_flag.png"},
-        {"conqueredFlag": "/assets/conquered_flag.png"},
-        {"hoverFlag": "/assets/hover_flag.png"}
+        {"main-map": "/assets/backgrounds/main-map.png"},
+        {"smallGoblin": "/assets/enemies/smallGoblin.png"},
+        {"map": "/assets/backgrounds/map.png"},
+        {"enemyFlag": "/assets/ui/enemy_flag.png"},
+        {"conqueredFlag": "/assets/ui/conquered_flag.png"},
+        {"hoverFlag": "/assets/ui/hover_flag.png"},
+        {"panelButton": "/assets/ui/panel-button.png"},
+        {"panelButtonHover": "/assets/ui/panel-button-hover.png"},
+        {"chains": "/assets/ui/chains.png"},
+        {"panelShell": "/assets/ui/panel-shell.png"},
+        {"panelExtendShell": "/assets/ui/panel-extend-shell.png"}
     ],
     "json": [
         {"mapConfig": "/config/game/map.config.json"}

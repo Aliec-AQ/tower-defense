@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Jersey25';
+    src: url('./font/Jersey25-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Jersey25', sans-serif;
+}
