@@ -70,13 +70,13 @@ export default class Level extends Phaser.Scene {
         this.currentWave++;
     }
 
-    // fin du niveau
+    // fin du niveau et affichage du menu de fin
     endLevel(win) {
         this.finished = true;
         // stop les ennemis restants
         if(!win){
             this.enemies.getChildren().forEach(enemy => {
-                enemy.stopFollow();
+                enemy.destroy();
             });
         }
 
@@ -153,11 +153,16 @@ export default class Level extends Phaser.Scene {
 
     //display ui
     displayUI(){
-        const extendedPannel = this.add.image(5, -60, 'panelExtendShell').setOrigin(0, 0).setScale(1.5);
-
-        // affiche les vies
+        // Create an extended panel and set its depth
+        const extendedPanel = this.add.image(5, -60, 'panelExtendShell').setOrigin(0, 0).setScale(1.5);
+        extendedPanel.setDepth(5);
+        
+        // Display lives and set its depth
         this.livesText = this.add.text(20, 20, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
-        // affiche l'argent
+        this.livesText.setDepth(10);
+        
+        // Display money and set its depth
         this.moneyText = this.add.text(20, 60, `Money: ${this.money}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
+        this.moneyText.setDepth(10);        
     }
 }

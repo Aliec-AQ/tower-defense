@@ -1,7 +1,7 @@
 export default class Enemy extends Phaser.GameObjects.PathFollower {
     hp;
     speed;
-    attack;
+    damage;
     pathOffset;
 
     constructor(scene, path, startPoint, enemyConfig, enemyStats ) {
@@ -11,9 +11,10 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.hp = enemyStats.hp;
-        this.attack = enemyStats.attack;
+        this.damage = enemyStats.damage;
         this.speed = enemyStats.speed;
         this.setVisible(false);
+        this.setDepth(1);
 
         // décalage de la position de départ
         let x = Math.round( Math.random() * 55 );
@@ -34,7 +35,7 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
                     duration: 10000 / this.speed,
                     positionOnPath: true,
                     onComplete: () => {
-                        this.scene.removeLife(this.attack);
+                        this.scene.removeLife(this.damage);
                         this.destroy();
                     }
                 });
