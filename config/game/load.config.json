@@ -13,6 +13,7 @@
         {"panelExtendShell": "/assets/ui/panel-extend-shell.png"}
     ],
     "json": [
-        {"mapConfig": "/config/game/map.config.json"}
+        {"mapConfig": "/config/game/map.config.json"},
+        {"enemies": "/config/game/enemies.json"}
     ]
 }

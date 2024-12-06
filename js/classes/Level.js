@@ -1,5 +1,4 @@
 import Enemy from './Enemy/Enemy.js';
-import SmallGoblin from './Enemy/SmallGoblin.js';
 
 export default class Level extends Phaser.Scene {
     constructor() {
@@ -18,7 +17,9 @@ export default class Level extends Phaser.Scene {
     create() {
         // récupère la configuration du niveau
         this.config = this.cache.json.get('levelConfig');
+        this.enemiesConfig = this.cache.json.get('enemies');
 
+        // initialisation des variables
         this.lives = this.config.lives;
         this.totalWaves = this.config.waves.length;
         this.money = this.config.money;
@@ -35,6 +36,9 @@ export default class Level extends Phaser.Scene {
             });
             return path;
         });
+
+        // affiche l'interface
+        this.displayUI();
 
         // vagues d'ennemis
         this.currentWave = 0;
@@ -58,13 +62,7 @@ export default class Level extends Phaser.Scene {
             for (let i = 0; i < enemyConfig.count; i++) {
                 const path = this.paths[enemyConfig.pathIndex];
                 const startPoint = path.getStartPoint();
-                let enemy = null;
-                switch(enemyConfig.type){
-                    case 'smallGoblin' : enemy = new SmallGoblin(this, path, startPoint, enemyConfig);
-                    break;
-                    default: console.log("merde de default");
-                    break
-                }
+                let enemy = new Enemy(this, path, startPoint, enemyConfig, this.enemiesConfig[enemyConfig.type]);
                 this.enemies.add(enemy);
             }
         });
@@ -151,5 +149,15 @@ export default class Level extends Phaser.Scene {
         if (!this.finished && this.enemies.countActive(true) === 0) {
             this.startNextWave();
         }
+    }
+
+    //display ui
+    displayUI(){
+        const extendedPannel = this.add.image(5, -60, 'panelExtendShell').setOrigin(0, 0).setScale(1.5);
+
+        // affiche les vies
+        this.livesText = this.add.text(20, 20, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
+        // affiche l'argent
+        this.moneyText = this.add.text(20, 60, `Money: ${this.money}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
     }
 }

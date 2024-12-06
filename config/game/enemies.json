@@ -1,0 +1,8 @@
+{
+    "smallGoblin":{
+        "hp": 10,
+        "damage": 2,
+        "speed": 1,
+        "image": "smallGoblin"
+    }
+}

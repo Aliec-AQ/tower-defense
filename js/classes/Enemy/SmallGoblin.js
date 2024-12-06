@@ -1,8 +1,0 @@
-import Enemy from "./Enemy.js";
-
-export default class SmallGoblin extends Enemy {
-    constructor(scene, path, startPoint, enemyConfig) {
-        super(scene, path, startPoint, enemyConfig,100,1,50);
-        this.setScale(0.35);
-    }
-}

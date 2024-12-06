@@ -4,15 +4,15 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
     attack;
     pathOffset;
 
-    constructor(scene, path, startPoint, enemyConfig, hp, attack, speed) {
-        super(scene, path, startPoint.x, startPoint.y, enemyConfig.type);
+    constructor(scene, path, startPoint, enemyConfig, enemyStats ) {
+        super(scene, path, startPoint.x, startPoint.y, enemyStats.image);
 
         // initialise des variables
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.hp = hp;
-        this.attack = attack;
-        this.speed = speed;
+        this.hp = enemyStats.hp;
+        this.attack = enemyStats.attack;
+        this.speed = enemyStats.speed;
         this.setVisible(false);
 
         // décalage de la position de départ
