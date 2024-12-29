@@ -17,6 +17,7 @@ export default class Level extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
         // Récupération des données du fichier de configuration
         this.config = this.cache.json.get('levelConfig');
         // Récupération des données des ennemis

@@ -6,6 +6,8 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
+        // Add a fade-in effect when the scene loads
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         this.config = this.cache.json.get('mapConfig');
 
@@ -51,6 +53,7 @@ class MainScene extends Phaser.Scene {
         });
     
         button.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
             this.launchLevel(buttonConfig.levelConfig);
         });
     }
