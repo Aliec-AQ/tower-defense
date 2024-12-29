@@ -61,13 +61,15 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
             // rend l'ennemi visible
             this.setVisible(true);
             this.scene.time.delayedCall(enemyConfig.delay * 1000, () => {
-                // rend l'ennemi visible
-                this.setVisible(true);
-                // stocke le décalage de position initial
-                const initialPathOffset = this.pathOffset.clone();
+
+                this.setVisible(true); // rend l'ennemi visible
+
+                const initialPathOffset = this.pathOffset.clone(); // stocke le décalage de position initial 
+                const pathLength = this.path.getLength(); // stocke la longueur du chemin
+
                 // démarre le suivi du chemin
                 this.startFollow({
-                    duration: 10000 / this.speed,
+                    duration: pathLength / this.speed, // durée du suivi en fonction de la longueur afin d'avoir une vitesse constante
                     positionOnPath: true,
                     onComplete: () => {
                         this.scene.removeLife(this.damage);
