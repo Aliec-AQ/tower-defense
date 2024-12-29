@@ -1,5 +1,5 @@
 import { createButton, createText, displayUI } from '../utils/UIUtils.js';
-import { createEnemies } from '../utils/EnemyUtils.js';
+import { createEnemies } from '../utils/enemyUtils.js';
 
 export default class Level extends Phaser.Scene {
     constructor() {
