@@ -72,9 +72,11 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
                     duration: pathLength / this.speed, // durée du suivi en fonction de la longueur afin d'avoir une vitesse constante
                     positionOnPath: true,
                     onComplete: () => {
-                        this.scene.removeLife(this.damage);
+                        if(this.scene){
+                            this.scene.removeLife(this.damage);
+                        }
                         this.destroy();
-                    }
+                   }
                 });
                 // on réinitialise le décalage de position car startFollow l'a modifié pour {x: 0, y: 0} NIQUE SA MERE PHASER AVEC SES METHODES DE MERDE ptn de out.copy de con
                 this.pathOffset = initialPathOffset;

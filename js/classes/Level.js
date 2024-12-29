@@ -71,9 +71,7 @@ export default class Level extends Phaser.Scene {
 
         // Suppression des ennemis restants
         if (!win) {
-            this.enemies.getChildren().forEach(enemy => {
-                enemy.destroy();
-            });
+            this.enemies.destroy(true);
         }
 
         // Affichage du panneau de fin de niveau
