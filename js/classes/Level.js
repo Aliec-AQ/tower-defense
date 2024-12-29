@@ -1,34 +1,37 @@
-import Enemy from './Enemy/Enemy.js';
+import { createButton, createText, displayUI } from '../utils/UIUtils.js';
+import { createEnemies } from '../utils/EnemyUtils.js';
 
 export default class Level extends Phaser.Scene {
     constructor() {
         super({ key: 'LevelScene' });
     }
 
-    init(){
+    init() {
+        // Récupération du fichier de configuration du niveau
         this.configFile = this.scene.settings.data;
     }
 
     preload() {
-        // charge la configuration du niveau
+        // Chargement du fichier de configuration du niveau
         this.load.json('levelConfig', this.configFile);
     }
 
     create() {
-        // récupère la configuration du niveau
+        // Récupération des données du fichier de configuration
         this.config = this.cache.json.get('levelConfig');
+        // Récupération des données des ennemis
         this.enemiesConfig = this.cache.json.get('enemies');
 
-        // initialisation des variables
+        // Initialisation des variables de jeu
         this.lives = this.config.lives;
         this.totalWaves = this.config.waves.length;
         this.money = this.config.money;
         this.finished = false;
 
-        // image de fond
+        // Affichage des éléments du jeu
         this.background = this.add.image(0, 0, this.config.background).setOrigin(0, 0);
 
-        // chemins des ennemis à suivre
+        // Création des chemins
         this.paths = this.config.paths.map(pathPoints => {
             const path = this.add.path(pathPoints[0].x, pathPoints[0].y);
             pathPoints.slice(1).forEach(point => {
@@ -37,106 +40,74 @@ export default class Level extends Phaser.Scene {
             return path;
         });
 
-        // affiche l'interface
-        this.displayUI();
+        // Affichage de l'interface utilisateur
+        displayUI(this, this.lives, this.money);
 
-        // vagues d'ennemis
+        // Initialisation des vagues
         this.currentWave = 0;
         this.startNextWave();
     }
 
-    // démarre la vague suivante
+
     startNextWave() {
-        // si on a fini toutes les vagues
+        // Vérification de la fin du niveau
         if (this.currentWave >= this.totalWaves) {
             this.endLevel(true);
             return;
         }
 
-        // on récupère la vague actuelle
+        // Création des ennemis de la vague
         const wave = this.config.waves[this.currentWave];
-        this.enemies = this.physics.add.group();
+        this.enemies = createEnemies(this, wave, this.paths, this.enemiesConfig);
 
-        // on crée les ennemis de la vague
-        wave.enemies.forEach(enemyConfig => {
-            for (let i = 0; i < enemyConfig.count; i++) {
-                const path = this.paths[enemyConfig.pathIndex];
-                const startPoint = path.getStartPoint();
-                let enemy = new Enemy(this, path, startPoint, enemyConfig, this.enemiesConfig[enemyConfig.type]);
-                this.enemies.add(enemy);
-            }
-        });
-
+        // Passage à la vague suivante
         this.currentWave++;
     }
 
-    // fin du niveau et affichage du menu de fin
     endLevel(win) {
+        // Fin du niveau 
         this.finished = true;
-        // stop les ennemis restants
-        if(!win){
+
+        // Suppression des ennemis restants
+        if (!win) {
             this.enemies.getChildren().forEach(enemy => {
                 enemy.destroy();
             });
         }
 
-        // pleins de pixel perfect configuration car sinon c'est la merde et c'est pas beau
-
-        // affiche le menu de fin
+        // Affichage du panneau de fin de niveau
         const panel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 20, 'panelShell').setScale(1.5);
         const chains = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 159, 'chains').setScale(1.5);
         const chains2 = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 298, 'chains').setScale(1.5);
         const panel2 = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'panelShell').setScale(1.5);
 
-        // bouton menu
-        const menuButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 12, 'panelButton')
-        .setScale(1.5)
-        .setInteractive()
-        .on('pointerover', () => menuButton.setTexture('panelButtonHover'))
-        .on('pointerout', () => menuButton.setTexture('panelButton'))
-        .on('pointerdown', () => {
-            this.scene.start('TransitionScene', {MainScene: true});
+        // Boutons de fin de niveau
+        const menuButton = createButton(this, this.cameras.main.centerX, this.cameras.main.centerY + 12, 'panelButton', 'panelButtonHover', () => {
+            this.scene.start('TransitionScene', { MainScene: true });
         });
-        // texte du bouton menu
-        const menuText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 12, 'Menu', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
+        createText(this, this.cameras.main.centerX, this.cameras.main.centerY + 12, 'Menu', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
 
-        // bouton replay
-        const replayButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 51, 'panelButton')
-        .setScale(1.5)
-        .setInteractive()
-        .on('pointerover', () => replayButton.setTexture('panelButtonHover'))
-        .on('pointerout', () => replayButton.setTexture('panelButton'))
-        .on('pointerdown', () => {
+        const replayButton = createButton(this, this.cameras.main.centerX, this.cameras.main.centerY - 51, 'panelButton', 'panelButtonHover', () => {
             this.scene.restart();
         });
-        // texte du bouton replay
-        const replayText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 51, 'Replay', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
+        createText(this, this.cameras.main.centerX, this.cameras.main.centerY - 51, 'Replay', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
 
-        // si on a gagné on affiche un texte de victoire
-        if(win){
-            // texte de victoire
-            const winText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Win', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' }).setOrigin(0.5);
+        // Affichage du message de fin de niveau
+        if (win) {
+            createText(this, this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Win', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' });
 
-            // bouton niveau suivant
             const extendPanel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 128, 'panelExtendShell').setScale(1.5);
 
-            const nextLevelButton = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'panelButton')
-            .setScale(1.5)
-            .setInteractive()
-            .on('pointerover', () => nextLevelButton.setTexture('panelButtonHover'))
-            .on('pointerout', () => nextLevelButton.setTexture('panelButton'))
-            .on('pointerdown', () => {
-                this.scene.start('TransitionScene', {MainScene: false, levelToLoad: this.config.nextLevel});
+            const nextLevelButton = createButton(this, this.cameras.main.centerX, this.cameras.main.centerY + 160, 'panelButton', 'panelButtonHover', () => {
+                this.scene.start('TransitionScene', { MainScene: false, levelToLoad: this.config.nextLevel });
             });
-            // texte du bouton niveau suivant
-            const nextLevelText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'Next Level', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' }).setOrigin(0.5);
-        }else{
-            // texte de défaite
-            const loseText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Lose', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' }).setOrigin(0.5);
+            createText(this, this.cameras.main.centerX, this.cameras.main.centerY + 160, 'Next Level', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
+        } else {
+            createText(this, this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Lose', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' });
         }
     }
 
-    // enlève des vies au joueur quand un ennemi atteint la fin du chemin
+    // Enlève une vie au joueur en fonction de l'attaque subie
     removeLife(attack) {
         this.lives -= attack;
         if (this.lives <= 0) {
@@ -144,25 +115,10 @@ export default class Level extends Phaser.Scene {
         }
     }
 
+    // Mise à jour du niveau
     update(time, delta) {
-        // si tous les ennemis de la vague ont été détruits on passe à la vague suivante
         if (!this.finished && this.enemies.countActive(true) === 0) {
             this.startNextWave();
         }
-    }
-
-    //display ui
-    displayUI(){
-        // Create an extended panel and set its depth
-        const extendedPanel = this.add.image(5, -60, 'panelExtendShell').setOrigin(0, 0).setScale(1.5);
-        extendedPanel.setDepth(5);
-        
-        // Display lives and set its depth
-        this.livesText = this.add.text(20, 20, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
-        this.livesText.setDepth(10);
-        
-        // Display money and set its depth
-        this.moneyText = this.add.text(20, 60, `Money: ${this.money}`, { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
-        this.moneyText.setDepth(10);        
     }
 }

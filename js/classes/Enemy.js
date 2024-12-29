@@ -1,18 +1,51 @@
+/**
+ * Classe Enemy : représente un ennemi dans le jeu
+ * 
+ * Enemy hérite de Phaser.GameObjects.PathFollower
+ * 
+ * Cette classe prend en paramètres :
+ * - une scene (Phaser.Scene)
+ * 
+ * - un chemin path à suivre (Phaser.Curves.Path)
+ * 
+ * - un point de départ startPoint (Phaser.Math.Vector2)
+ * 
+ * - un objet enemyConfig contenant les propriétés suivantes :
+ *      - delay : délai avant le début de la vague
+ *      - pathIndex : index du chemin à suivre
+ *      - type : type d'ennemi
+ *      - count : nombre d'ennemis (utilisé pour les vagues mais utilisé dans Level.js et non ici)
+ * 
+ * - un objet enemyStats contenant les propriétés suivantes :
+ *      - hp : points de vie
+ *      - speed : vitesse
+ *      - damage : dégâts infligés
+ *      - image : image de l'ennemi
+ */
 export default class Enemy extends Phaser.GameObjects.PathFollower {
+    // propriétés
     hp;
     speed;
     damage;
     pathOffset;
 
+    /**
+     * Constructeur de la classe Enemy
+     */
     constructor(scene, path, startPoint, enemyConfig, enemyStats ) {
+        // appel du constructeur de la classe mère
         super(scene, path, startPoint.x, startPoint.y, enemyStats.image);
 
-        // initialise des variables
+        // ajout de l'ennemi à la scène et au moteur physique
         scene.add.existing(this);
         scene.physics.add.existing(this);
+
+        // initialisation des propriétés
         this.hp = enemyStats.hp;
         this.damage = enemyStats.damage;
         this.speed = enemyStats.speed;
+
+        // rend l'ennemi invisible
         this.setVisible(false);
         this.setDepth(1);
 
@@ -23,7 +56,9 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
 
         let rnd = Math.random() * 1.5;
 
+        // délai avant le début de la vague
         scene.time.delayedCall(rnd*1000, () => {
+            // rend l'ennemi visible
             this.setVisible(true);
             this.scene.time.delayedCall(enemyConfig.delay * 1000, () => {
                 // rend l'ennemi visible
@@ -53,6 +88,7 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         }
     }
 
+    
     startLife(){
         
     }
