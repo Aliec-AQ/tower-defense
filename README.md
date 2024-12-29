@@ -10,4 +10,4 @@
 - [ ] Modifier et terminer UI et UX des niveaux
 - [ ] Animations des monstres
 - [ ] Plus de monstres
-- [~] Ajout de transitions entre les scenes (nuages ou un truc du genre) | il y a des fondu en entrée et sortie de scène 
+- [X] Ajout de transitions entre les scenes (nuages ou un truc du genre) | il y a des fondu en entrée et sortie de scène 
