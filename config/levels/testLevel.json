@@ -1,8 +1,8 @@
 {
     "levelIndex": 1,
     "name": "Test Level fail",
-    "lives" : 10,
-    "money" : 100,
+    "lives": 10,
+    "money": 350,
     "background": "map",
 
     "paths": [
@@ -14,13 +14,13 @@
             { "x": 1040, "y": 720 }
         ],
         [
-            { "x":-100, "y": 475},
+            { "x": -100, "y": 475 },
             { "x": 0, "y": 475 },
             { "x": 1040, "y": 475 },
             { "x": 1040, "y": 0 }
         ],
         [
-            { "x":-100, "y": 475},
+            { "x": -100, "y": 475 },
             { "x": 0, "y": 475 },
             { "x": 1040, "y": 475 },
             { "x": 1040, "y": 110 },
@@ -44,9 +44,8 @@
             ]
         }
     ],
-    "turrets": [
+    "turretsSlots": [
         {
-            "type": "basicTurret",
             "x": 200,
             "y": 200
         },
@@ -55,5 +54,9 @@
             "x": 400,
             "y": 400
         }
+    ],
+    "availableTurrets": [
+        "basicTurret",
+        "advancedTurret"
     ]
 }

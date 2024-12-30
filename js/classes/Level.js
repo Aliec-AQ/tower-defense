@@ -24,6 +24,8 @@ export default class Level extends Phaser.Scene {
         this.config = this.cache.json.get('levelConfig');
         // Récupération des données des ennemis
         this.enemiesConfig = this.cache.json.get('enemies');
+        // Récupération des données des tourelles
+        this.turretsConfig = this.cache.json.get('turrets');
 
         // Initialisation des variables de jeu
         this.lives = this.config.lives;
@@ -50,9 +52,10 @@ export default class Level extends Phaser.Scene {
         this.currentWave = 0;
         this.startNextWave();
 
-        // Création des tourelles
-        this.turrets = this.config.turrets.map(turretConfig => {
-            return new Turret(this, turretConfig.x, turretConfig.y, 'turret', 150, 10);
+        // Création des emplacements de tourelles
+        this.turretsSlots = this.config.turretsSlots.map(slotConfig => {
+            const turretTypeConfig = slotConfig.type ? this.turretsConfig[slotConfig.type] : null;
+            return new Turret(this, slotConfig.x, slotConfig.y, turretTypeConfig, this.config.availableTurrets);
         });
     }
 
@@ -82,6 +85,9 @@ export default class Level extends Phaser.Scene {
             this.enemies.destroy(true);
         }
 
+        // Stop turret logic
+        this.turretsSlots.forEach(turret => turret.stopLogic());
+
         // Affichage du panneau de fin de niveau
         const panel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 20, 'panelShell').setScale(1.5);
         const chains = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 159, 'chains').setScale(1.5);
@@ -110,6 +116,7 @@ export default class Level extends Phaser.Scene {
     // Enlève une vie au joueur en fonction de l'attaque subie
     removeLife(attack) {
         this.lives -= attack;
+        this.updateLivesText();
         if (this.lives <= 0) {
             this.endLevel(false);
         }
@@ -120,5 +127,25 @@ export default class Level extends Phaser.Scene {
         if (!this.finished && this.enemies.countActive(true) === 0) {
             this.startNextWave();
         }
+    }
+
+    updateLivesText() {
+        this.livesText.setText(`Lives: ${this.lives}`);
+    }
+
+    updateMoneyText() {
+        this.moneyText.setText(`Money: ${this.money}`);
+    }
+
+    // Method to decrease money and update the text
+    decreaseMoney(amount) {
+        this.money -= amount;
+        this.updateMoneyText();
+    }
+
+    // Method to increase money and update the text
+    increaseMoney(amount) {
+        this.money += amount;
+        this.updateMoneyText();
     }
 }

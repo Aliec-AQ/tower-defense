@@ -2,7 +2,8 @@
     "smallGoblin":{
         "hp": 10,
         "damage": 2,
-        "speed": 25,
+        "speed": 10,
+        "reward": 20,
         "image": "smallGoblin"
     }
 }

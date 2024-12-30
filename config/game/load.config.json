@@ -11,10 +11,14 @@
         {"chains": "/assets/ui/chains.png"},
         {"panelShell": "/assets/ui/panel-shell.png"},
         {"panelExtendShell": "/assets/ui/panel-extend-shell.png"},
-        {"turret": "/assets/turrets/turret.jpg"}
+        {"basicTurret": "/assets/turrets/basicTurret.jpg"},
+        {"advancedTurret": "/assets/turrets/advancedTurret.png"},
+        {"emptyTurretSlot": "/assets/turrets/emptyTurretSlot.png"},
+        {"hoverTurretSlot": "/assets/turrets/hoverTurretSlot.png"}
     ],
     "json": [
         {"mapConfig": "/config/game/map.config.json"},
-        {"enemies": "/config/game/enemies.json"}
+        {"enemies": "/config/game/enemies.json"},
+        {"turrets": "/config/game/turrets.json"}
     ]
 }

@@ -27,6 +27,7 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
     hp;
     speed;
     damage;
+    reward;
     pathOffset;
 
     /**
@@ -44,6 +45,7 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
         this.hp = enemyStats.hp;
         this.damage = enemyStats.damage;
         this.speed = enemyStats.speed;
+        this.reward = enemyStats.reward;
 
         // rend l'ennemi invisible
         this.setVisible(false);
@@ -67,10 +69,6 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
                 const initialPathOffset = this.pathOffset.clone(); // stocke le décalage de position initial 
                 const pathLength = this.path.getLength(); // stocke la longueur du chemin
 
-                console.log("pathLength : " + pathLength);
-                console.log("speed : " + this.speed);
-                console.log("duration : " + pathLength * (100 / this.speed));
-
                 // démarre le suivi du chemin
                 this.startFollow({
                     duration: pathLength * (100 / this.speed), // durée du suivi en fonction de la longueur afin d'avoir une vitesse constante
@@ -90,15 +88,10 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
 
     // méthode pour infliger des dégâts à l'ennemi WIP
     takeDamage(damage) {
-        console.log("takeDamage : " + damage);
         this.hp -= damage;
         if (this.hp <= 0) {
+            this.scene.increaseMoney(this.reward);
             this.destroy();
         }
-    }
-
-    
-    startLife(){
-        
     }
 }

@@ -2,7 +2,7 @@
     "levelIndex": 3,
     "name": "Test Level 2 (win)",
     "lives" : 1000,
-    "money" : 100,
+    "money" : 350,
     "background": "main-map",
 
     "paths": [
@@ -34,9 +34,8 @@
             ]
         }
     ],
-    "turrets": [
+    "turretsSlots": [
         {
-            "type": "basicTurret",
             "x": 200,
             "y": 200
         },
@@ -45,5 +44,9 @@
             "x": 400,
             "y": 400
         }
+    ],
+    "availableTurrets": [
+        "basicTurret",
+        "advancedTurret"
     ]
 }

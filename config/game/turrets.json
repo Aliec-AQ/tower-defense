@@ -2,41 +2,49 @@
     "basicTurret": {
         "image": "basicTurret",
         "cost": 100,
+        "attack": 10,
         "range": 150,
         "firerate": 1,
-        "upgrades": [
-            {
-                "cost": 150,
-                "range": 200,
-                "firerate": 1.5,
-                "image": "basicTurretUpgrade1"
-            },
-            {
-                "cost": 200,
-                "range": 250,
-                "firerate": 2,
-                "image": "basicTurretUpgrade2"
-            }
-        ]
+        "upgrades": ["basicTurret2"]
+    },
+    "basicTurret2": {
+        "image": "basicTurret",
+        "cost": 150,
+        "attack": 10,
+        "range": 200,
+        "firerate": 1.5,
+        "upgrades": ["basicTurret3"]
+    },
+    "basicTurret3": {
+        "image": "basicTurret",
+        "cost": 200,
+        "attack": 10,
+        "range": 250,
+        "firerate": 2,
+        "upgrades": []
     },
     "advancedTurret": {
         "image": "advancedTurret",
         "cost": 200,
+        "attack": 40,
         "range": 200,
         "firerate": 0.5,
-        "upgrades": [
-            {
-                "cost": 300,
-                "range": 250,
-                "firerate": 0.75,
-                "image": "advancedTurretUpgrade1"
-            },
-            {
-                "cost": 400,
-                "range": 300,
-                "firerate": 1,
-                "image": "advancedTurretUpgrade2"
-            }
-        ]
+        "upgrades": ["advancedTurret2"]
+    },
+    "advancedTurret2": {
+        "image": "advancedTurret",
+        "cost": 300,
+        "attack": 40,
+        "range": 250,
+        "firerate": 0.75,
+        "upgrades": ["advancedTurret3"]
+    },
+    "advancedTurret3": {
+        "image": "advancedTurret",
+        "cost": 400,
+        "attack": 40,
+        "range": 300,
+        "firerate": 1,
+        "upgrades": []
     }
 }
