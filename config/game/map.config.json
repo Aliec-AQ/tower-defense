@@ -1,12 +1,12 @@
 {
     "levels":[
-        { "x": 555, "y": 230, "levelConfig": "/config/levels/testLevel.json", "isEnemy": false, "predecessor": [7]},
-        { "x": 75, "y": 270, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": [4]},
-        { "x": 1120, "y": 45, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": [3, 6]},
-        { "x": 1037, "y": 530, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": [0]},
-        { "x": 115, "y": 470, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": [5]},
-        { "x": 115, "y": 645, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": null},
-        { "x": 795, "y": 170, "levelConfig": "/config/levels/testLevel.json", "isEnemy": true, "predecessor": [0]},
-        { "x": 350, "y": 350, "levelConfig": "/config/levels/testLevel2.json", "isEnemy": false, "predecessor": [1]}
+        { "x": 115, "y": 645, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [1] },
+        { "x": 115, "y": 470, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [2] },
+        { "x": 75, "y": 270, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [3] },
+        { "x": 350, "y": 350, "levelConfig": "/config/levels/testLevel2.json", "nextLevel": [4] },
+        { "x": 555, "y": 230, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [5, 6] },
+        { "x": 795, "y": 170, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [7] },
+        { "x": 1037, "y": 530, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [7] },
+        { "x": 1120, "y": 45, "levelConfig": "/config/levels/testLevel.json", "nextLevel": [] }
     ]
 }

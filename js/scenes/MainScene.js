@@ -1,4 +1,5 @@
 import Level from '../classes/Level.js';
+import saveManager from '../classes/SaveManager.js';
 
 class MainScene extends Phaser.Scene {
     constructor() {
@@ -20,19 +21,17 @@ class MainScene extends Phaser.Scene {
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(2, 0xffffff, 1);
     
-        // Création des boutons
-        this.config.levels.forEach((buttonConfig, index) => {
-            this.createButton(buttonConfig, index);
-        });
+        let firstLevel = this.config.levels[0];
+        this.createButton(firstLevel, 0);
     }
     
     createButton(buttonConfig, index) {
         // Choix de l'image à afficher
         let button = null;
-        if(buttonConfig.isEnemy){
-            button = this.add.image(buttonConfig.x, buttonConfig.y, 'enemyFlag').setOrigin(0.5, 0.5);
-        }else{
+        if (saveManager.isLevelDone(index)) {
             button = this.add.image(buttonConfig.x, buttonConfig.y, 'conqueredFlag').setOrigin(0.5, 0.5);
+        } else {
+            button = this.add.image(buttonConfig.x, buttonConfig.y, 'enemyFlag').setOrigin(0.5, 0.5);
         }
     
         button.setScale(0.33);
@@ -43,11 +42,13 @@ class MainScene extends Phaser.Scene {
         hoverImage.setScale(0.33);
         hoverImage.setVisible(false);
     
-        // Draw lines to predecessors
-        if (buttonConfig.predecessor) {
-            buttonConfig.predecessor.forEach(predecessorIndex => {
-                const predecessorConfig = this.config.levels[predecessorIndex];
-                this.drawLine(predecessorConfig.x, predecessorConfig.y, buttonConfig.x, buttonConfig.y);
+        // Draw lines to next levels if the level is done
+        if (saveManager.isLevelDone(index)) {
+            console.log(buttonConfig.nextLevel);
+            buttonConfig.nextLevel.forEach(nextLevelIndex => {
+                const nextLevelConfig = this.config.levels[nextLevelIndex];
+                this.drawLine(buttonConfig.x, buttonConfig.y, nextLevelConfig.x, nextLevelConfig.y);
+                this.createButton(nextLevelConfig, nextLevelIndex);
             });
         }
     

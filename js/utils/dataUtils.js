@@ -30,7 +30,7 @@ export function storeDataToSave (saveNumber, data){
 
 export function getDataFromSave (saveNumber){
     let data = JSON.parse(localStorage.getItem('saves')) || { saves: [] };
-    return decodeBS64String(data.saves[saveNumber]);
+    return JSON.parse(decodeBS64String(data.saves[saveNumber]));
 }
 
 export function deleteSave (saveNumber){
@@ -40,6 +40,7 @@ export function deleteSave (saveNumber){
 }
 
 export function createSave(data){
+    data = JSON.stringify(data);
     let saves = JSON.parse(localStorage.getItem('saves')) || { saves: [] };
     let nullIndex = saves.saves.indexOf(null);
     

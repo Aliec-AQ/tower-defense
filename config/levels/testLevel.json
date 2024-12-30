@@ -2,7 +2,6 @@
     "lives" : 10,
     "money" : 100,
     "background": "map",
-    "nextLevel": "/config/levels/testLevel2.json",
 
     "paths": [
         [

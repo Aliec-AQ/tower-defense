@@ -94,13 +94,6 @@ export default class Level extends Phaser.Scene {
         // Affichage du message de fin de niveau
         if (win) {
             createText(this, this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Win', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' });
-
-            const extendPanel = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY + 128, 'panelExtendShell').setScale(1.5);
-
-            const nextLevelButton = createButton(this, this.cameras.main.centerX, this.cameras.main.centerY + 160, 'panelButton', 'panelButtonHover', () => {
-                this.scene.start('TransitionScene', { MainScene: false, levelToLoad: this.config.nextLevel });
-            });
-            createText(this, this.cameras.main.centerX, this.cameras.main.centerY + 160, 'Next Level', { fontSize: '32px', fill: '#fff', fontFamily: 'Jersey25' });
         } else {
             createText(this, this.cameras.main.centerX, this.cameras.main.centerY - 230, 'You Lose', { fontSize: '64px', fill: '#fff', fontFamily: 'Jersey25', fontStyle: 'bold' });
         }
