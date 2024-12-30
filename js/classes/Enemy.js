@@ -67,9 +67,13 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
                 const initialPathOffset = this.pathOffset.clone(); // stocke le décalage de position initial 
                 const pathLength = this.path.getLength(); // stocke la longueur du chemin
 
+                console.log("pathLength : " + pathLength);
+                console.log("speed : " + this.speed);
+                console.log("duration : " + pathLength * (100 / this.speed));
+
                 // démarre le suivi du chemin
                 this.startFollow({
-                    duration: pathLength / this.speed, // durée du suivi en fonction de la longueur afin d'avoir une vitesse constante
+                    duration: pathLength * (100 / this.speed), // durée du suivi en fonction de la longueur afin d'avoir une vitesse constante
                     positionOnPath: true,
                     onComplete: () => {
                         if(this.scene){
@@ -85,8 +89,9 @@ export default class Enemy extends Phaser.GameObjects.PathFollower {
     }
 
     // méthode pour infliger des dégâts à l'ennemi WIP
-    takeDamage(attacker) {
-        this.hp -= attacker.attack;
+    takeDamage(damage) {
+        console.log("takeDamage : " + damage);
+        this.hp -= damage;
         if (this.hp <= 0) {
             this.destroy();
         }

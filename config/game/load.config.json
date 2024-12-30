@@ -10,7 +10,8 @@
         {"panelButtonHover": "/assets/ui/panel-button-hover.png"},
         {"chains": "/assets/ui/chains.png"},
         {"panelShell": "/assets/ui/panel-shell.png"},
-        {"panelExtendShell": "/assets/ui/panel-extend-shell.png"}
+        {"panelExtendShell": "/assets/ui/panel-extend-shell.png"},
+        {"turret": "/assets/turrets/turret.jpg"}
     ],
     "json": [
         {"mapConfig": "/config/game/map.config.json"},

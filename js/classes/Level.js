@@ -1,6 +1,7 @@
 import { createButton, createText, displayUI } from '../utils/UIUtils.js';
 import { createEnemies } from '../utils/enemyUtils.js';
 import saveManager from './SaveManager.js';
+import Turret from './Turret.js';
 
 export default class Level extends Phaser.Scene {
     constructor() {
@@ -48,8 +49,12 @@ export default class Level extends Phaser.Scene {
         // Initialisation des vagues
         this.currentWave = 0;
         this.startNextWave();
-    }
 
+        // Création des tourelles
+        this.turrets = this.config.turrets.map(turretConfig => {
+            return new Turret(this, turretConfig.x, turretConfig.y, 'turret', 150, 10);
+        });
+    }
 
     startNextWave() {
         // Vérification de la fin du niveau

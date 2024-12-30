@@ -33,5 +33,17 @@
                 { "type": "smallGoblin", "count": 3, "pathIndex": 0, "delay": 1 }
             ]
         }
+    ],
+    "turrets": [
+        {
+            "type": "basicTurret",
+            "x": 200,
+            "y": 200
+        },
+        {
+            "type": "advancedTurret",
+            "x": 400,
+            "y": 400
+        }
     ]
 }
