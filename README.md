@@ -3,12 +3,16 @@
 ## TODO
 
 - [X] Ajouter menu de load quand on lance le jeu (loading circle + loading bar + text)
-- [ ] Ajouter menu avec sélection de progression
+- [X] Ajouter menu avec sélection de sauvegarde
+- [X] Ajouter la progression et prérequis des niveaux
+- [X] Ajout de transitions entre les scenes (nuages ou un truc du genre) | il y a des fondu en entrée et sortie de scène 
+
 - [ ] Ajouter tourelles
-- [ ] Ajouter création de niveau : import et export de string en base 64 pour le niveau, juste un fichier json au final, utilisation de background et path prédéfini
-- [ ] Ajouter la progression et prérequis des niveaux
 - [ ] Modifier et terminer UI et UX des niveaux
+- [ ] Terminer la boucle de jeu d'un niveau
+
 - [ ] Animations des monstres
 - [ ] Plus de monstres
 - [ ] Plus de niveaux
-- [X] Ajout de transitions entre les scenes (nuages ou un truc du genre) | il y a des fondu en entrée et sortie de scène 
+
+- [ ] Ajouter création de niveau : import et export de string en base 64 pour le niveau, juste un fichier json au final, utilisation de background et path prédéfini
