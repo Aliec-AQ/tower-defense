@@ -1,4 +1,6 @@
 {
+    "levelIndex": 1,
+    "name": "Test Level fail",
     "lives" : 10,
     "money" : 100,
     "background": "map",

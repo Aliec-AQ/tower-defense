@@ -1,4 +1,6 @@
 {
+    "levelIndex": 3,
+    "name": "Test Level 2 (win)",
     "lives" : 1000,
     "money" : 100,
     "background": "main-map",

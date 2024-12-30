@@ -30,7 +30,7 @@ class SaveManager {
 
     createNewSave() {
         let data = {
-            levelDone: [0,1,2,3,4,5],
+            levelDone: [0,1,2],
         }
         Data.createSave(data);
         this.saves = Data.getSaveList();
@@ -43,6 +43,13 @@ class SaveManager {
 
     isLevelDone(levelIndex) {
         return this.currentSave.levelDone.includes(levelIndex);
+    }
+
+    winLevel(levelIndex) {
+        if (!this.isLevelDone(levelIndex)) {
+            this.currentSave.levelDone.push(levelIndex);
+            this.storeCurrentSave(this.currentSave.index, this.currentSave);
+        }
     }
 }
 

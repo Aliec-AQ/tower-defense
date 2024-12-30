@@ -44,7 +44,6 @@ class MainScene extends Phaser.Scene {
     
         // Draw lines to next levels if the level is done
         if (saveManager.isLevelDone(index)) {
-            console.log(buttonConfig.nextLevel);
             buttonConfig.nextLevel.forEach(nextLevelIndex => {
                 const nextLevelConfig = this.config.levels[nextLevelIndex];
                 this.drawLine(buttonConfig.x, buttonConfig.y, nextLevelConfig.x, nextLevelConfig.y);

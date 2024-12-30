@@ -1,5 +1,6 @@
 import { createButton, createText, displayUI } from '../utils/UIUtils.js';
 import { createEnemies } from '../utils/enemyUtils.js';
+import saveManager from './SaveManager.js';
 
 export default class Level extends Phaser.Scene {
     constructor() {
@@ -68,6 +69,8 @@ export default class Level extends Phaser.Scene {
     endLevel(win) {
         // Fin du niveau 
         this.finished = true;
+
+        saveManager.winLevel(this.config.levelIndex);
 
         // Suppression des ennemis restants
         if (!win) {
