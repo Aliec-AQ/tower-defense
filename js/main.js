@@ -1,6 +1,7 @@
 
 import BootScene from './scenes/BootScene.js';
 import MainScene from './scenes/MainScene.js';
+import SavesScene from './scenes/SavesScene.js';
 import TransitionScene from './scenes/TransitionScene.js';
 
 
@@ -15,7 +16,7 @@ const config = {
             gravity: { y: 0 }
         }
     },
-    scene: [BootScene, MainScene, TransitionScene]
+    scene: [BootScene, SavesScene, MainScene, TransitionScene]
 };
 
 const game = new Phaser.Game(config);

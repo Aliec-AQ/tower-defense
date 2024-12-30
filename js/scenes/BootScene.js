@@ -81,7 +81,7 @@ class BootScene extends Phaser.Scene {
                 this.load.once('complete', () => {
                     this.cameras.main.fadeOut(1000, 0, 0, 0);
                     this.cameras.main.once('camerafadeoutcomplete', () => {
-                        this.scene.start('MainScene'); // Remplacer 'MainScene' par la clé de votre prochaine scène
+                        this.scene.start('SavesScene'); // Remplacer 'MainScene' par la clé de votre prochaine scène
                     });
                 });
                 this.load.start();
