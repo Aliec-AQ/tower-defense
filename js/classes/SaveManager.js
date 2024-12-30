@@ -12,6 +12,7 @@ class SaveManager {
 
     selectSave(index) {
         if (this.saves.saves[index]) {
+            this.currentIndex = index;
             this.currentSave = Data.getDataFromSave(index);
             return this.currentSave;
         } else {
@@ -36,7 +37,9 @@ class SaveManager {
         this.saves = Data.getSaveList();
     }
 
-    storeCurrentSave(index, data) {
+    storeCurrentSave() {
+        let index = this.currentIndex;
+        let data = this.currentSave;
         Data.storeDataToSave(index, data);
         this.saves = Data.getSaveList();
     }
@@ -48,7 +51,7 @@ class SaveManager {
     winLevel(levelIndex) {
         if (!this.isLevelDone(levelIndex)) {
             this.currentSave.levelDone.push(levelIndex);
-            this.storeCurrentSave(this.currentSave.index, this.currentSave);
+            this.storeCurrentSave();
         }
     }
 }

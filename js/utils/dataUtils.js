@@ -23,6 +23,7 @@ export function removeFromLocalStorage (key){
 // fonctions spécifiques à notre jeu
 
 export function storeDataToSave (saveNumber, data){
+    data = JSON.stringify(data);
     let saves = JSON.parse(localStorage.getItem('saves')) || { saves: [] };
     saves.saves[saveNumber] = createBS64String(data);
     localStorage.setItem('saves', JSON.stringify(saves));
