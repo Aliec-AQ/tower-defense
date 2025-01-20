@@ -1,5 +1,7 @@
 # Un jeu tower defense en HTML 5 et Phaser
-
+***
+⚠️ Ce projet n'est pas encore terminé ⚠️
+***
 ## TODO
 - [ ] Ajouter type de projectile aux tourelles
 - [ ] Modifier et terminer UI et UX des niveaux
